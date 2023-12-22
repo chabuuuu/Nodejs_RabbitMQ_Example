@@ -9,12 +9,12 @@ const postVideo = async ({msg})=> {
         //2. create chanel
         const chanel = await conn.createChannel()
         //3. create exchange
-        const nameExchange = 'pubsub'
-        await chanel.assertExchange(nameExchange, 'fanout', {
+        const nameExchange = 'direct-exchange'
+        await chanel.assertExchange(nameExchange, 'direct', {
             durable: false
         })
         //4. publish video
-        await chanel.publish(nameExchange, '', Buffer.from(msg))
+        await chanel.publish(nameExchange, 'green', Buffer.from(msg))
         console.log('Send OK');
 
         setTimeout(() => {
